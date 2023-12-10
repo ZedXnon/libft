@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Werror -O2
+CFLAGS = -Wall -Wextra -Werror
 
 SOURCES = main.c my_functions.c
 NAME = libft.a
