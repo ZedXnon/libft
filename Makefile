@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-SOURCES = ft_isalpha.c ft_isdigit.c isalnum.c
+SOURCES = ft_isalpha.c ft_isdigit.c isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c
 NAME = libft.a
 
 OBJECTS = $(SOURCES:.c=.o)
