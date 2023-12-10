@@ -14,5 +14,7 @@
 # define LIBFT_H
 
 int	ft_isalpha(int argument);
+int	ft_isdigit(int argument);
+int ft_isalnum(int character);
 
 #endif

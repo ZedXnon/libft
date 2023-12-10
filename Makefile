@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-SOURCES = main.c my_functions.c
+SOURCES = ft_isalpha.c ft_isdigit.c isalnum.c
 NAME = libft.a
 
 OBJECTS = $(SOURCES:.c=.o)
@@ -12,12 +12,20 @@ all: $(NAME)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJECTS)
-	$(CC) $(OBJECTS) -o $(NAME)
+	ar rcs $(NAME) $(OBJECTS)
 
 clean:
-	rm -f $(OBJECTS)
+ifeq ($(OS),Windows_NT)
+	del $(OBJECTS)
+else
+	rm -rf $(OBJECTS)
+endif
 
 fclean: clean
+ifeq ($(OS),Windows_NT)
+	del $(NAME)
+else
 	rm -f $(NAME)
+endif
 
 re: fclean all
