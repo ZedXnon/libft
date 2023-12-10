@@ -22,5 +22,8 @@ int		ft_isalnum(int character);
 int		ft_isascii(int character);
 int		ft_isprint(int argument);
 size_t	ft_strlen(const char *string);
+int		ft_toupper(int character);
+int		ft_tolower(int character);
+char	*ft_strchr(const char *string, int character);
 
 #endif
