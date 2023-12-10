@@ -14,13 +14,10 @@
 
 char	*ft_strchr(const char *string, int character)
 {
-	int	index;
-
-	index = 0;
 	while (*string)
 	{
 		if (*string == character)
-			return (string);
+			return ((char *)string);
 		string++;
 	}
 	return (NULL);
