@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dwoidt <danielwoidt2@gmail.com>            +#+  +:+       +#+        */
+/*   By: dwoidt <dwoidt@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/11 00:42:03 by dwoidt            #+#    #+#             */
-/*   Updated: 2023/12/11 00:42:03 by dwoidt           ###   ########.fr       */
+/*   Created: 2023/12/11 00:48:16 by dwoidt            #+#    #+#             */
+/*   Updated: 2023/12/11 00:48:16 by dwoidt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isalnum(int character)
+int	ft_isascii(int character)
 {
-	return (ft_isalpha(character) || ft_isdigit(character));
+	return (character >= 0 && character < 128);
 }

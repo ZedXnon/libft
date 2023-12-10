@@ -15,6 +15,7 @@
 
 int	ft_isalpha(int argument);
 int	ft_isdigit(int argument);
-int ft_isalnum(int character);
+int	ft_isalnum(int character);
+int	ft_isascii(int character);
 
 #endif
