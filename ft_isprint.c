@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dwoidt <danielwoidt2@gmail.com>            +#+  +:+       +#+        */
+/*   By: dwoidt <dwoidt@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/11 00:31:12 by dwoidt            #+#    #+#             */
-/*   Updated: 2023/12/11 00:31:12 by dwoidt           ###   ########.fr       */
+/*   Created: 2023/12/11 00:57:11 by dwoidt            #+#    #+#             */
+/*   Updated: 2023/12/11 00:57:11 by dwoidt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "libft.h"
 
-int	ft_isalpha(int argument);
-int	ft_isdigit(int argument);
-int	ft_isalnum(int character);
-int	ft_isascii(int character);
-int	ft_isprint(int argument);
-
-#endif
+int	ft_isprint(int argument)
+{
+	return (argument >= ' ' && argument <= '~');
+}
