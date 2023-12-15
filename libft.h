@@ -25,5 +25,6 @@ size_t	ft_strlen(const char *string);
 int		ft_toupper(int character);
 int		ft_tolower(int character);
 char	*ft_strchr(const char *string, int character);
+void	*ft_memset(void *str, int c, size_t n);
 
 #endif
