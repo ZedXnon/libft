@@ -1,7 +1,13 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-SOURCES = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c ft_tolower.c ft_toupper.c ft_strchr.c
+STRING_FUNCS = ft_strlen.c ft_strchr.c ft_toupper.c ft_tolower.c
+NUM_FUNCS = ft_isdigit.c
+CHAR_FUNCS = ft_isalpha.c ft_isalnum.c ft_isascii.c ft_isprint.c
+MEMORY_FUNCS = ft_bzero.c ft_memcpy.c ft_memset.c
+
+SOURCES = $(STRING_FUNCS) $(NUM_FUNCS) $(CHAR_FUNCS) $(MEMORY_FUNCS)
+
 NAME = libft.a
 
 OBJECTS = $(SOURCES:.c=.o)
