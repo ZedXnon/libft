@@ -39,4 +39,4 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	free(src_buffer);
 	return (dest);
 }
-TODO: fix memmove to not use malloc.
+//TODO: fix memmove to not use malloc.

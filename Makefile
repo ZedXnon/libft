@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-STRING_FUNCS = ft_strlen.c ft_strchr.c ft_toupper.c ft_tolower.c ft_strlcpy.c
+STRING_FUNCS = ft_strlen.c ft_strchr.c ft_toupper.c ft_tolower.c ft_strlcpy.c ft_strlcat.c ft_strrchr.c
 NUM_FUNCS = ft_isdigit.c
 CHAR_FUNCS = ft_isalpha.c ft_isalnum.c ft_isascii.c ft_isprint.c
 MEMORY_FUNCS = ft_bzero.c ft_memcpy.c ft_memset.c ft_memmove.c
