@@ -10,14 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-char *ft_substr(char const *s, unsigned int start, size_t len)
+#include "libft.h"
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
+	char	*ptr;
+	size_t	length;
 
-
-}
-
-int main(void)
-{
-
-	return (0);
+	length = ft_strlen(s + start) + 1;
+	if (length <= len)
+	{
+		ptr = malloc(length * sizeof(char));
+	}
+	else
+	{
+		ptr = malloc(len * sizeof(char));
+		length = len;
+	}
+	if (!ptr)
+		return (NULL);
+	ft_strlcpy(ptr, s + start, length);
+	return (ptr);
 }
