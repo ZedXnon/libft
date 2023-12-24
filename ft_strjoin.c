@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static void	copy_str(char *str, char *dest, size_t *i)
+static void	copy_str(char const *str, char *dest, size_t *i)
 {
 	while (*str)
 	{
@@ -32,8 +32,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!string)
 		return (NULL);
 	length = 0;
-	copy_str(s1, string, length);
+	copy_str(s1, string, &length);
 	copy_str(s2, string, &length);
 	string[length] = '\0';
 	return (string);
 }
+
