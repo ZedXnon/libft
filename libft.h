@@ -40,5 +40,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	*t_calloc(size_t num_elements, size_t element_size);
 char	*strdup(const char *str);
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strtrim(char const *s1, char const *set);
 
 #endif
