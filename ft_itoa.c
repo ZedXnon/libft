@@ -51,7 +51,7 @@ static size_t	get_length(int n)
 
 char	*ft_itoa(int n)
 {
-	size_t	length;
+	int	length;
 	char	*ptr;
 	size_t	i;
 
@@ -66,7 +66,7 @@ char	*ft_itoa(int n)
 		n = -n;
 		i++;
 	}
-	while (length > i)
+	while ((unsigned int)length > i)
 	{
 		ptr[length - 1] = (n % 10) + '0';
 		n /= 10;
