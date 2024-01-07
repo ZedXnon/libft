@@ -36,3 +36,6 @@ else
 endif
 
 re: fclean all
+
+test: $(NAME)
+	$(CC) $(CFLAGS) -o libft_test libft_test.c -L. libft.a
