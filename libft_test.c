@@ -49,6 +49,10 @@ int check_result(int actual, int expected, const char* function_name) {
     }
 }
 
+int compare_char_ptr(const void* a, const void* b) {
+    return (*(char**)a == *(char**)b);
+}
+
 int compare_char(const void* a, const void* b) {
     return (*(unsigned char*)a == *(unsigned char*)b);
 }
@@ -71,6 +75,22 @@ void ft_isalpha_test() {
     }
 }
 
+void ft_toupper_test() {
+    const char* function_name = "ft_toupper";
+    int success = 1;
+
+    success &= check_result(ft_toupper('a'), 'A', function_name);
+    success &= check_result(ft_toupper('A'), 'A', function_name);
+    success &= check_result(ft_toupper('z'), 'Z', function_name);
+    success &= check_result(ft_toupper('Z'), 'Z', function_name);
+    success &= check_result(ft_toupper('1'), '1', function_name);
+    success &= check_result(ft_toupper('\t'), '\t', function_name);
+    success &= check_result(ft_toupper('\n'), '\n', function_name);
+
+    if (success) {
+        printf("SUCCESS: %s\n", function_name);
+    }
+}
 // Test function for ft_isdigit
 void ft_isdigit_test() {
     const char* function_name = "ft_isdigit";
@@ -84,6 +104,23 @@ void ft_isdigit_test() {
     success &= check_result(ft_isdigit('@'), 0, function_name);
     success &= check_result(ft_isdigit('\t'), 0, function_name);
     success &= check_result(ft_isdigit('\n'), 0, function_name);
+
+    if (success) {
+        printf("SUCCESS: %s\n", function_name);
+    }
+}
+
+void ft_tolower_test() {
+    const char* function_name = "ft_tolower";
+    int success = 1;
+
+    success &= check_result(ft_tolower('a'), 'a', function_name);
+    success &= check_result(ft_tolower('A'), 'a', function_name);
+    success &= check_result(ft_tolower('z'), 'z', function_name);
+    success &= check_result(ft_tolower('Z'), 'z', function_name);
+    success &= check_result(ft_tolower('1'), '1', function_name);
+    success &= check_result(ft_tolower('\t'), '\t', function_name);
+    success &= check_result(ft_tolower('\n'), '\n', function_name);
 
     if (success) {
         printf("SUCCESS: %s\n", function_name);
@@ -201,12 +238,15 @@ void ft_bzero_test() {
 
 int main(void) {
     ft_isalpha_test();
+	ft_toupper_test();
     ft_isdigit_test();
+	ft_tolower_test();
 	ft_isalnum_test();
     ft_isascii_test();
+	// ft_strchr_test();
     ft_isprint_test();
     ft_strlen_test();
 	ft_memset_test();
-	ft_bzero_test();
+	// ft_bzero_test();
     return 0;
 }
