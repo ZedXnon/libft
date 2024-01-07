@@ -236,6 +236,51 @@ void ft_bzero_test() {
     }
 }
 
+void ft_atoi_test() {
+    const char* function_name = "ft_atoi";
+    int success = 1;
+
+    // Test case 1: Basic positive integer
+    success &= check_result(ft_atoi("123"), 123, function_name);
+
+    // Test case 2: Basic negative integer
+    success &= check_result(ft_atoi("-456"), -456, function_name);
+
+    // Test case 3: String with leading spaces
+    success &= check_result(ft_atoi("   789"), 789, function_name);
+
+    // Test case 4: String with trailing spaces
+    success &= check_result(ft_atoi("456   "), 456, function_name);
+
+    // Test case 5: String with both leading and trailing spaces
+    success &= check_result(ft_atoi("  -123  "), -123, function_name);
+
+    // Test case 6: Integer with positive sign
+    success &= check_result(ft_atoi("+789"), 789, function_name);
+
+    // Test case 7: Integer with multiple signs
+    success &= check_result(ft_atoi("--456"), 456, function_name);
+
+    // Test case 8: Integer with overflow
+    success &= check_result(ft_atoi("2147483648"), 2147483647, function_name);  // Overflow should return INT_MAX
+
+    // Test case 9: Integer with underflow
+    success &= check_result(ft_atoi("-2147483649"), -2147483648, function_name);  // Underflow should return INT_MIN
+
+    // Test case 10: Empty string
+    success &= check_result(ft_atoi(""), 0, function_name);
+
+    // Test case 11: String with non-numeric characters
+    success &= check_result(ft_atoi("abc"), 0, function_name);
+
+    // Test case 12: String with non-numeric characters and then a valid number
+    success &= check_result(ft_atoi("xyz123"), 0, function_name);
+
+    if (success) {
+        printf("SUCCESS: %s\n", function_name);
+    }
+}
+
 int main(void) {
     ft_isalpha_test();
 	ft_toupper_test();
@@ -247,6 +292,7 @@ int main(void) {
     ft_isprint_test();
     ft_strlen_test();
 	ft_memset_test();
+	// ft_atoi_test();
 	// ft_bzero_test();
     return 0;
 }
