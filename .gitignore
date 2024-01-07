@@ -4,3 +4,5 @@
 .a
 *.exe
 check_not_in_file.t
+*.o
+*.a
