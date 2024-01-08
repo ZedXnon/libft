@@ -25,7 +25,6 @@ void print_memory(const void *memory, int size) {
 int check_memory(const void *memory, int size, const void *expected_memory,
                  int (*compare)(const void *, const void *), const char * function_name) {
     int success = 1;
-
     for (int i = 0; i < size; i++) {
         if (!compare(&((unsigned char*)memory)[i], &((unsigned char*)expected_memory)[i])) {
             success = 0;
@@ -36,7 +35,6 @@ int check_memory(const void *memory, int size, const void *expected_memory,
             break;
         }
     }
-
     return success;
 }
 
@@ -195,18 +193,19 @@ void ft_memset_test() {
     const char *function_name = "ft_memset";
     char buffer[10];
     char expected_buffer[10];
+	int success = 1;
 
     // Test case 1: Set buffer to 'A' (65 in ASCII)
     ft_memset(buffer, 'A', sizeof(buffer));
     memset(expected_buffer, 'A', sizeof(expected_buffer));
-    if (check_memory(buffer, sizeof(buffer), expected_buffer, compare_char, function_name)) {
-        printf("SUCCESS: %s\n", function_name);
-    }
+    success &= check_memory(buffer, sizeof(buffer), expected_buffer, compare_char, function_name);
 
     // Test case 2: Set buffer to 0
     ft_memset(buffer, 0, sizeof(buffer));
     memset(expected_buffer, 0, sizeof(expected_buffer));
-    if (check_memory(buffer, sizeof(buffer), expected_buffer, compare_char, function_name)) {
+    success &= check_memory(buffer, sizeof(buffer), expected_buffer, compare_char, function_name);
+	if (success)
+	{
         printf("SUCCESS: %s\n", function_name);
     }
 }
@@ -214,26 +213,25 @@ void ft_memset_test() {
 void ft_bzero_test() {
     const char *function_name = "ft_bzero";
     char buffer[10];
-    char expected_buffer[10];
+    char expected_buffer[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+	int success = 1;
 
     // Test case 1: Set buffer to 'A' and then zero it using ft_bzero
     memset(buffer, 'A', sizeof(buffer));
     ft_bzero(buffer, sizeof(buffer));
-    if (check_memory(buffer, sizeof(buffer), expected_buffer, compare_char, function_name)) {
-        printf("SUCCESS: %s\n", function_name);
-    }
-
+    success &= check_memory(buffer, sizeof(buffer), expected_buffer, compare_char, function_name);
+   
     // Test case 2: Set buffer to 'A' and zero only part of it
     memset(buffer, 'A', sizeof(buffer));
     ft_bzero(buffer, 5);
     memset(expected_buffer, 0, 5);
-    if (check_memory(buffer, sizeof(buffer), expected_buffer, compare_char, function_name)) {
-        printf("SUCCESS: %s\n", function_name);
-    }
+    success &= check_memory(buffer, 5, expected_buffer, compare_char, function_name);
 
     // Test case 3: Zero an empty buffer
     ft_bzero(expected_buffer, 0);
-    if (check_memory(expected_buffer, 0, expected_buffer, compare_char, function_name)) {
+    success &= check_memory(expected_buffer, 0, expected_buffer, compare_char, function_name);
+	if (success)
+	{
         printf("SUCCESS: %s\n", function_name);
     }
 }
@@ -291,7 +289,7 @@ int main(void) {
     ft_isprint_test();
     ft_strlen_test();
 	ft_memset_test();
-	// ft_bzero_test();
+	ft_bzero_test();
 	// ft_memcpy_test();
 	// ft_memmove_test();
 	// ft_strlcpy_test();
