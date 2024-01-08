@@ -14,16 +14,16 @@
 #include <string.h>
 
 
-void print_memory(const void* memory, int size) {
+void print_memory(const void *memory, int size) {
     printf("Memory Content: ");
     for (int i = 0; i < size; i++) {
-        printf("%02X ", ((unsigned char*)memory)[i]);
+        printf("%02X ", ((unsigned char *)memory)[i]);
     }
     printf("\n");
 }
 
-int check_memory(const void* memory, int size, const void* expected_memory,
-                 int (*compare)(const void*, const void*), const char* function_name) {
+int check_memory(const void *memory, int size, const void *expected_memory,
+                 int (*compare)(const void *, const void *), const char * function_name) {
     int success = 1;
 
     for (int i = 0; i < size; i++) {
@@ -40,7 +40,7 @@ int check_memory(const void* memory, int size, const void* expected_memory,
     return success;
 }
 
-int check_result(int actual, int expected, const char* function_name) {
+int check_result(int actual, int expected, const char *function_name) {
     if (actual == expected) {
         return 1;
     } else {
@@ -49,17 +49,17 @@ int check_result(int actual, int expected, const char* function_name) {
     }
 }
 
-int compare_char_ptr(const void* a, const void* b) {
-    return (*(char**)a == *(char**)b);
+int compare_char_ptr(const void *a, const void *b) {
+    return (*(char **)a == *(char **)b);
 }
 
-int compare_char(const void* a, const void* b) {
-    return (*(unsigned char*)a == *(unsigned char*)b);
+int compare_char(const void *a, const void *b) {
+    return (*(unsigned char *)a == *(unsigned char *)b);
 }
 
 // Test function for ft_isalpha
 void ft_isalpha_test() {
-    const char* function_name = "ft_isalpha";
+    const char *function_name = "ft_isalpha";
     int success = 1;
 
     success &= check_result(ft_isalpha('a'), 1, function_name);
@@ -76,7 +76,7 @@ void ft_isalpha_test() {
 }
 
 void ft_toupper_test() {
-    const char* function_name = "ft_toupper";
+    const char *function_name = "ft_toupper";
     int success = 1;
 
     success &= check_result(ft_toupper('a'), 'A', function_name);
@@ -93,7 +93,7 @@ void ft_toupper_test() {
 }
 // Test function for ft_isdigit
 void ft_isdigit_test() {
-    const char* function_name = "ft_isdigit";
+    const char *function_name = "ft_isdigit";
     int success = 1;
 
     success &= check_result(ft_isdigit('0'), 1, function_name);
@@ -111,7 +111,7 @@ void ft_isdigit_test() {
 }
 
 void ft_tolower_test() {
-    const char* function_name = "ft_tolower";
+    const char *function_name = "ft_tolower";
     int success = 1;
 
     success &= check_result(ft_tolower('a'), 'a', function_name);
@@ -128,7 +128,7 @@ void ft_tolower_test() {
 }
 
 void ft_isalnum_test() {
-    const char* function_name = "ft_isalnum";
+    const char *function_name = "ft_isalnum";
     int success = 1;
 
     success &= check_result(ft_isalnum('a'), 1, function_name);
@@ -144,7 +144,7 @@ void ft_isalnum_test() {
 
 // Test function for ft_isascii
 void ft_isascii_test() {
-    const char* function_name = "ft_isascii";
+    const char *function_name = "ft_isascii";
     int success = 1;
 
     success &= check_result(ft_isascii('a'), 1, function_name);
@@ -161,7 +161,7 @@ void ft_isascii_test() {
 
 // Test function for ft_isprint
 void ft_isprint_test() {
-    const char* function_name = "ft_isprint";
+    const char *function_name = "ft_isprint";
     int success = 1;
 
     success &= check_result(ft_isprint('a'), 1, function_name);
@@ -179,7 +179,7 @@ void ft_isprint_test() {
 
 // Test function for ft_strlen
 void ft_strlen_test() {
-    const char* function_name = "ft_strlen";
+    const char *function_name = "ft_strlen";
     int success = 1;
 
     success &= check_result(ft_strlen(""), 0, function_name);
@@ -192,7 +192,7 @@ void ft_strlen_test() {
 }
 
 void ft_memset_test() {
-    const char* function_name = "ft_memset";
+    const char *function_name = "ft_memset";
     char buffer[10];
     char expected_buffer[10];
 
@@ -212,7 +212,7 @@ void ft_memset_test() {
 }
 
 void ft_bzero_test() {
-    const char* function_name = "ft_bzero";
+    const char *function_name = "ft_bzero";
     char buffer[10];
     char expected_buffer[10];
 
@@ -239,7 +239,7 @@ void ft_bzero_test() {
 }
 
 void ft_atoi_test() {
-    const char* function_name = "ft_atoi";
+    const char *function_name = "ft_atoi";
     int success = 1;
 
     // Test case 1: Basic positive integer
