@@ -152,6 +152,7 @@ void ft_isascii_test() {
     success &= check_result(ft_isascii(128), 0, function_name);
     success &= check_result(ft_isascii('\t'), 1, function_name);
     success &= check_result(ft_isascii('\n'), 1, function_name);
+	success &= check_result(ft_isascii(0), 1, function_name);
 
     if (success) {
         printf("SUCCESS: %s\n", function_name);
@@ -167,6 +168,7 @@ void ft_isprint_test() {
     success &= check_result(ft_isprint(32), 1, function_name);
     success &= check_result(ft_isprint(31), 0, function_name);
     success &= check_result(ft_isprint(127), 0, function_name);
+	success &= check_result(ft_isprint(126), 1, function_name);
     success &= check_result(ft_isprint('\t'), 0, function_name);
     success &= check_result(ft_isprint('\n'), 0, function_name);
 
@@ -283,16 +285,38 @@ void ft_atoi_test() {
 
 int main(void) {
     ft_isalpha_test();
-	ft_toupper_test();
     ft_isdigit_test();
-	ft_tolower_test();
 	ft_isalnum_test();
     ft_isascii_test();
-	// ft_strchr_test();
     ft_isprint_test();
     ft_strlen_test();
 	ft_memset_test();
-	// ft_atoi_test();
 	// ft_bzero_test();
+	// ft_memcpy_test();
+	// ft_memmove_test();
+	// ft_strlcpy_test();
+	// ft_strlcat_test();
+
+	ft_toupper_test();
+	ft_tolower_test();
+	// ft_strchr_test();
+	// ft_strrchr_test();
+	// ft_strncmp_test();
+	// ft_memchr_test();
+	// ft_memcmp_test();
+	// ft_strnstr_test();
+	// ft_atoi_test();
+
+	// ft_substr_test();
+	// ft_strjoin_test();
+	// ft_strtrim_test();
+	// ft_split_test();
+	// ft_iota_test();
+	// ft_strmapi_test();
+	// ft_striteri_test();
+	// ft_putchar_fd_test();
+	// ft_putstr_fd_test();
+	// ft_putendl_fd_test();
+	// ft_putnbr_fd_test();
     return 0;
 }
