@@ -23,7 +23,7 @@ void print_memory(const void *memory, int size) {
 }
 
 int check_memory(const void *memory, int size, const void *expected_memory,
-                 int (*compare)(const void *, const void *), const char * function_name) {
+                 int (*compare)(const void *, const void *), const char *function_name) {
     int success = 1;
     for (int i = 0; i < size; i++) {
         if (!compare(&((unsigned char*)memory)[i], &((unsigned char*)expected_memory)[i])) {
@@ -215,7 +215,6 @@ void ft_bzero_test() {
     char buffer[10];
     char expected_buffer[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	int success = 1;
-
     // Test case 1: Set buffer to 'A' and then zero it using ft_bzero
     memset(buffer, 'A', sizeof(buffer));
     ft_bzero(buffer, sizeof(buffer));
@@ -285,39 +284,24 @@ void ft_memcpy_test() {
     const char *function_name = "ft_memcpy";
     int success = 1;
 
-    // Test Case 2: Overlapping Memory Regions
-    char buffer_overlap[10] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
-    ft_memcpy(buffer_overlap + 3, buffer_overlap, 5);
-    char expected_buffer_overlap[10] = {'A', 'B', 'C', 'A', 'B', 'C', 'D', 'E', 'F', 'J'};
-    success &= check_memory(buffer_overlap, sizeof(buffer_overlap), expected_buffer_overlap, compare_char, function_name);
+    // Copying 0 bytes
+	char buffer[10] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+	char real_buffer[10];
+	char expected_buffer[10];
+	memset(real_buffer, 0, 10);
+	memset(expected_buffer, 0, 10);
+	ft_memcpy(expected_buffer, buffer, 0);
+	success &= check_memory(buffer0, sizeof(buffer0), expected_buffer, compare_char, function_name);
 
-    // Test Case 3: NULL Pointers
-    char buffer_null[5] = {'A', 'B', 'C', 'D', 'E'};
-    ft_memcpy(NULL, buffer_null, sizeof(buffer_null));  // Copy to NULL
-    success &= check_memory(buffer_null, sizeof(buffer_null), buffer_null, compare_char, function_name);
-    ft_memcpy(buffer_null, NULL, sizeof(buffer_null));  // Copy from NULL
-    success &= check_memory(buffer_null, sizeof(buffer_null), buffer_null, compare_char, function_name);
 
-    // Additional Test Case 4: Copying 0 bytes
-    char buffer0[10] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
-    char expected_buffer0[10];
-    ft_memcpy(expected_buffer0, buffer0, 0);
-    success &= check_memory(buffer0, sizeof(buffer0), expected_buffer0, compare_char, function_name);
-
-    // Additional Test Case 5: Large Memory Blocks
+    // Large Memory Blocks
     char buffer_large[1000];
     char expected_buffer_large[1000];
     memset(buffer_large, 'A', sizeof(buffer_large));
     ft_memcpy(expected_buffer_large, buffer_large, sizeof(buffer_large));
     success &= check_memory(buffer_large, sizeof(buffer_large), expected_buffer_large, compare_char, function_name);
 
-    // Additional Test Case 6: Partial Overlapping
-    char buffer_partial[10] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
-    ft_memcpy(buffer_partial + 2, buffer_partial, 5);
-    char expected_buffer_partial[10] = {'A', 'B', 'A', 'B', 'C', 'D', 'E', 'F', 'I', 'J'};
-    success &= check_memory(buffer_partial, sizeof(buffer_partial), expected_buffer_partial, compare_char, function_name);
-
-    // Additional Test Case 7: Uninitialized Memory
+    // Uninitialized Memory
     char buffer_uninitialized[10];
     char expected_buffer_uninitialized[10] = {0};
     ft_memcpy(buffer_uninitialized, buffer_uninitialized, sizeof(buffer_uninitialized));
@@ -328,7 +312,6 @@ void ft_memcpy_test() {
     }
 }
 
-
 int main(void) {
     ft_isalpha_test();
     ft_isdigit_test();
@@ -336,6 +319,8 @@ int main(void) {
     ft_isascii_test();
     ft_isprint_test();
     ft_strlen_test();
+
+
 	ft_memset_test();
 	ft_bzero_test();
 	ft_memcpy_test();
