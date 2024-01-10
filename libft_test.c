@@ -344,9 +344,58 @@ void ft_memcpy_test() {
 
 void ft_memmove_test() {
 	const char *function_name = "ft_memmove";
-	int success = 1;
+    int success = 1;
 
-	if (success) {
+    // Copying 0 bytes
+	char buffer[10] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+	char real_buffer[10];
+	char expected_buffer[10];
+	memset(real_buffer, 0, 10);
+	memset(expected_buffer, 0, 10);
+	char *actual = ft_memcpy(real_buffer, buffer, 0);
+	char *expected = memcpy(expected_buffer, buffer, 0);
+	success &= check_memory(real_buffer, sizeof(real_buffer), expected_buffer, compare_char, function_name, 1);
+	
+	// Testing reutrn value
+	success &= check_memory(actual, sizeof(actual), expected, compare_char, function_name, 2);
+
+	ft_memcpy(real_buffer, buffer, 7);
+	memcpy(expected_buffer, buffer, 7);
+	success &= check_memory(real_buffer, sizeof(real_buffer), expected_buffer, compare_char, function_name, 3);
+
+    // Large Memory Blocks
+    char buffer_large[1000];
+	char test_buffer[1000];
+    char expected_buffer_large[1000];
+    memset(buffer_large, 'A', sizeof(buffer_large));
+	expected = memcpy(expected_buffer_large, buffer_large, sizeof(expected_buffer_large));
+    actual = ft_memcpy(test_buffer, buffer_large, sizeof(buffer_large));
+    success &= check_memory(buffer_large, sizeof(buffer_large), expected_buffer_large, compare_char, function_name, 4);
+
+	// Testing return value
+	success &= check_memory(test_buffer, sizeof(test_buffer), expected_buffer_large, compare_char, function_name, 5);
+
+	char overlap_buffer_1[10] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+    char overlap_real_buffer_1[10];
+    memset(overlap_real_buffer_1, 0, 10);
+    char *overlap_actual_1 = ft_memcpy(overlap_real_buffer_1, overlap_buffer_1 + 3, 7);
+    char *overlap_expected_1 = memcpy(overlap_real_buffer_1, overlap_buffer_1 + 3, 7);
+    success &= check_memory(overlap_actual_1, sizeof(overlap_real_buffer_1), overlap_expected_1, compare_char, function_name, 6);
+	
+    
+	// Overlapping Scenario 2: Destination before Source
+    char overlap_buffer_2[10] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+    char overlap_real_buffer_2[10];
+    char overlap_expected_buffer_2[10];
+    memset(overlap_real_buffer_2, 0, 10);
+    memset(overlap_expected_buffer_2, 0, 10);
+    ft_memcpy(overlap_real_buffer_2 + 3, overlap_buffer_2, 7);
+    memcpy(overlap_expected_buffer_2 + 3, overlap_buffer_2, 7);
+    success &= check_memory(overlap_real_buffer_2, sizeof(overlap_real_buffer_2), overlap_expected_buffer_2, compare_char, function_name, 7);
+
+	
+
+    if (success) {
         printf("SUCCESS: %s\n", function_name);
     }
 }
@@ -361,8 +410,8 @@ int main(void) {
 	ft_memset_test();
 	ft_bzero_test();
 	ft_memcpy_test();
-
-	// ft_memmove_test();
+	ft_memmove_test();
+	
 	// ft_strlcpy_test();
 	// ft_strlcat_test();
 

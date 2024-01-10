@@ -40,3 +40,19 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	return (dest);
 }
 //TODO: fix memmove to not use malloc.
+
+void *ftt_memmove(void *dest, const void *src, size_t n)
+{
+	char *d;
+	char *s;
+
+	d = (char *)dest;
+	s = (char *)src;
+	if (s < d || n == 0)
+	{
+
+	}
+	
+
+	return (dest);
+}
