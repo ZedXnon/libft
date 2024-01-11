@@ -51,7 +51,7 @@ static size_t	get_length(int n)
 
 char	*ft_itoa(int n)
 {
-	int	length;
+	int		length;
 	char	*ptr;
 	size_t	i;
 
