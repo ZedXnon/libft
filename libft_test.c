@@ -22,6 +22,20 @@ void print_memory(const void *memory, int size) {
     printf("\n");
 }
 
+int check_string(const char *actual, const char *expected, const char *function_name, const int test_no, const char *info) {
+    size_t actual_len = strlen(actual);
+    size_t expected_len = strlen(expected);
+
+    if (actual_len == expected_len && strcmp(actual, expected) == 0) {
+        return 1;
+    } else {
+        printf("FAIL: %s - Test %d - %s\n", function_name, test_no, info);
+        printf("Expected: \"%s\", Actual: \"%s\"\n", expected, actual);
+        return 0;
+    }
+}
+
+
 int check_memory(const void *memory, int size, const void *expected_memory,
                  int (*compare)(const void *, const void *), const char *function_name, const int test_no) {
     int success = 1;
@@ -400,6 +414,77 @@ void ft_memmove_test() {
     }
 }
 
+void ft_strlcpy_test() {
+    const char *function_name = "ft_strlcpy";
+    int success = 1;
+    
+    // Test Case 1: Copying a string within the buffer size
+    char src1[] = "hello";
+    char dest1[10];
+    char dest1_real[] = "hello";
+    
+    ft_strlcpy(dest1, src1, sizeof(dest1));
+    success &= check_string(dest1, dest1_real, function_name, 1, "Copying within buffer size");
+
+    // Test Case 2: Copying a string with a smaller buffer size
+    char src2[] = "hello";
+    char dest2[3];
+    char dest2_real[] = "he";
+    
+    ft_strlcpy(dest2, src2, sizeof(dest2));
+
+    success &= check_string(dest2, dest2_real, function_name, 2, "Copying to a smaller buffer");
+
+    // Test Case 3: Copying an empty string
+    char src3[] = "";
+    char dest3[5];
+    char dest3_real[] = "";
+    
+    ft_strlcpy(dest3, src3, sizeof(dest3));
+
+    success &= check_string(dest3, dest3_real, function_name, 3, "Copying an empty string");
+
+    // Test Case 4: Copying to an empty buffer
+    char src4[] = "hello";
+    char dest4[1];
+    char dest4_real[] = "";
+    
+    ft_strlcpy(dest4, src4, sizeof(dest4));
+
+    success &= check_string(dest4, dest4_real, function_name, 4, "Copying to an empty buffer");
+
+    // Test Case 5: Copying an empty source string to a larger buffer
+    char src5[] = "";
+    char dest5[10];
+    char dest5_real[] = "";
+    
+    ft_strlcpy(dest5, src5, sizeof(dest5));
+
+    success &= check_string(dest5, dest5_real, function_name, 5, "Copying an empty source string to a larger buffer");
+
+    // Test Case 6: Copying a non-empty source string to a buffer with size 0
+    char src6[] = "hello";
+    char dest6[1] = "\0";
+    char dest6_real[] = "";
+
+    ft_strlcpy(dest6, src6, 0);
+
+    success &= check_string(dest6, dest6_real, function_name, 6, "Copying to a buffer with size 0");
+    // Test Case 7: Copying a source string that is exactly the size of the destination buffer
+    char src7[] = "hello";
+    char dest7[5];
+    char dest7_real[] = "hell";
+    
+    ft_strlcpy(dest7, src7, sizeof(dest7));
+
+    success &= check_string(dest7, dest7_real, function_name, 7, "Copying a string with the size of the destination buffer");
+
+    if (success) {
+        printf("SUCCESS: %s\n", function_name);
+    }
+}
+
+
 int main(void) {
     ft_isalpha_test();
     ft_isdigit_test();
@@ -411,9 +496,10 @@ int main(void) {
 	ft_bzero_test();
 	ft_memcpy_test();
 	ft_memmove_test();
+	ft_strlcpy_test();
 	
-	// ft_strlcpy_test();
 	// ft_strlcat_test();
+
 
 	ft_toupper_test();
 	ft_tolower_test();
