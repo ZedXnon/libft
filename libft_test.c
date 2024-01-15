@@ -22,6 +22,30 @@ void print_memory(const void *memory, int size) {
     printf("\n");
 }
 
+int check_int_array(const int *actual, const int *expected, int size, const char *function_name, const int test_no) {
+    int success = 1;
+
+    if (expected == NULL) {
+        if (actual != NULL) {
+            success = 0;
+            printf("FAIL: %s - Test %d - Expected is NULL, but actual is not.\n", function_name, test_no);
+        }
+        return (success);
+    }
+
+    for (int i = 0; i < size; i++) {
+        if (actual[i] != expected[i]) {
+            success = 0;
+            printf("FAIL: %s - Test %d - Incorrect value at index %d\n", function_name, test_no, i);
+            printf("Expected: %d, Actual: %d\n", expected[i], actual[i]);
+            break;
+        }
+    }
+
+    return (success);
+}
+
+
 int check_string(const char *actual, const char *expected, const char *function_name, const int test_no, const char *info) {
     size_t actual_len = strlen(actual);
     size_t expected_len = strlen(expected);
@@ -31,7 +55,7 @@ int check_string(const char *actual, const char *expected, const char *function_
     } else {
         printf("FAIL: %s - Test %d - %s\n", function_name, test_no, info);
         printf("Expected: \"%s\", Actual: \"%s\"\n", expected, actual);
-        return 0;
+        return (0);
     }
 }
 
@@ -68,6 +92,14 @@ int compare_char_ptr(const void *a, const void *b) {
 int compare_char(const void *a, const void *b) {
     return (*(unsigned char *)a == *(unsigned char *)b);
 }
+
+int compare_int(const void *a, const void *b) {
+    const int *int_a = (const int *)a;
+    const int *int_b = (const int *)b;
+    
+    return (*int_a == *int_b) ? 1 : 0;
+}
+
 
 // Test function for ft_isalpha
 void ft_isalpha_test() {
@@ -484,9 +516,179 @@ void ft_strlcpy_test() {
     }
 }
 
+void ft_strlcat_test()
+{
+    const char *function_name = "ft_strlcat";
+    int success = 1;
+
+    // Test Case 1: Concatenating strings within the buffer size
+    char dest1[15] = "hello";
+    char src1[] = "world";
+    char dest1_real[] = "helloworld";
+    
+    size_t result1 = ft_strlcat(dest1, src1, sizeof(dest1));
+    success &= check_string(dest1, dest1_real, function_name, 1, "Concatenating within buffer size");
+    success &= check_result(result1, strlen(dest1_real), function_name);
+
+    // Test Case 2: Concatenating to a smaller buffer
+    char dest2[7] = "hello";
+    char src2[] = "world";
+    char dest2_real[] = "hellow";
+    
+    size_t result2 = ft_strlcat(dest2, src2, sizeof(dest2));
+    success &= check_string(dest2, dest2_real, function_name, 2, "Concatenating to a smaller buffer");
+    success &= check_result(result2, strlen(dest2_real), function_name);
+
+    // Test Case 3: Concatenating an empty source string
+    char dest3[10] = "hello";
+    char src3[] = "";
+    char dest3_real[] = "hello";
+    
+    size_t result3 = ft_strlcat(dest3, src3, sizeof(dest3));
+    success &= check_string(dest3, dest3_real, function_name, 3, "Concatenating an empty source string");
+    success &= check_result(result3, strlen(dest3_real), function_name);
+
+    // Test Case 4: Concatenating to an empty destination string
+    char dest4[1] = "";
+    char src4[] = "world";
+    char dest4_real[] = "w";
+    
+    size_t result4 = ft_strlcat(dest4, src4, sizeof(dest4));
+    success &= check_string(dest4, dest4_real, function_name, 4, "Concatenating to an empty destination string");
+    success &= check_result(result4, strlen(dest4_real), function_name);
+
+    // Test Case 5: Concatenating an empty source string to a larger buffer
+    char dest5[10] = "hello";
+    char src5[] = "";
+    char dest5_real[] = "hello";
+    
+    size_t result5 = ft_strlcat(dest5, src5, sizeof(dest5));
+    success &= check_string(dest5, dest5_real, function_name, 5, "Concatenating an empty source string to a larger buffer");
+    success &= check_result(result5, strlen(dest5_real), function_name);
+
+    // Test Case 6: Concatenating a non-empty source string to a buffer with size 0
+    char dest6[1] = "";
+    char src6[] = "world";
+    char dest6_real[] = "";
+    
+    size_t result6 = ft_strlcat(dest6, src6, 0);
+    success &= check_string(dest6, dest6_real, function_name, 6, "Concatenating to a buffer with size 0");
+    success &= check_result(result6, strlen(dest6_real), function_name);
+
+    // Test Case 7: Concatenating a source string that is exactly the size of the destination buffer
+    char dest7[10] = "hello";
+    char src7[] = "world";
+    char dest7_real[] = "helloworld";
+    
+    size_t result7 = ft_strlcat(dest7, src7, sizeof(dest7));
+    success &= check_string(dest7, dest7_real, function_name, 7, "Concatenating a string with the size of the destination buffer");
+    success &= check_result(result7, strlen(dest7_real), function_name);
+
+    // Additional Edge Cases:
+
+    // Test Case 8: Concatenating to an empty destination string with larger buffer size
+    char dest8[10] = "";
+    char src8[] = "world";
+    char dest8_real[] = "world";
+    
+    size_t result8 = ft_strlcat(dest8, src8, sizeof(dest8));
+    success &= check_string(dest8, dest8_real, function_name, 8, "Concatenating to an empty destination string with larger buffer size");
+    success &= check_result(result8, strlen(dest8_real), function_name);
+
+    // Test Case 9: Concatenating an empty source string to a larger buffer with larger buffer size
+    char dest9[15] = "hello";
+    char src9[] = "";
+    char dest9_real[] = "hello";
+    
+    size_t result9 = ft_strlcat(dest9, src9, sizeof(dest9));
+    success &= check_string(dest9, dest9_real, function_name, 9, "Concatenating an empty source string to a larger buffer with larger buffer size");
+    success &= check_result(result9, strlen(dest9_real), function_name);
+
+    // Test Case 10: Concatenating to a buffer with size 0
+    char dest10[10] = "hello";
+    char src10[] = "world";
+    char dest10_real[] = "hello";
+    
+    size_t result10 = ft_strlcat(dest10, src10, 0);
+    success &= check_string(dest10, dest10_real, function_name, 10, "Concatenating to a buffer with size 0");
+    success &= check_result(result10, strlen(dest10_real), function_name);
+
+    // Test Case 11: Concatenating a source string that is exactly one less than needed for the destination buffer
+    char dest11[10] = "hello";
+    char src11[] = "world";
+    char dest11_real[] = "helloworld";
+    
+    size_t result11 = ft_strlcat(dest11, src11, sizeof(dest11) - 1);
+    success &= check_string(dest11, dest11_real, function_name, 11, "Concatenating a source string that is exactly one less than needed for the destination buffer");
+    success &= check_result(result11, strlen(dest11_real), function_name);
+
+    // Test Case 12: Concatenating a source string that is exactly one more than needed for the destination buffer
+    char dest12[10] = "hello";
+    char src12[] = "world";
+    char dest12_real[] = "helloworl";
+    
+    size_t result12 = ft_strlcat(dest12, src12, sizeof(dest12) - 1);
+    success &= check_string(dest12, dest12_real, function_name, 12, "Concatenating a source string that is exactly one more than needed for the destination buffer");
+    success &= check_result(result12, strlen(dest12_real), function_name);
+
+    // Test Case 13: Concatenating to a buffer larger than needed
+    char dest13[20] = "hello";
+    char src13[] = "world";
+    char dest13_real[] = "helloworld";
+    
+    size_t result13 = ft_strlcat(dest13, src13, sizeof(dest13));
+    success &= check_string(dest13, dest13_real, function_name, 13, "Concatenating to a buffer larger than needed");
+    success &= check_result(result13, strlen(dest13_real), function_name);
+
+    // Test Case 14: Concatenating to a buffer larger than needed with additional null characters
+    char dest14[20] = "hello";
+    char src14[] = "world";
+    char dest14_real[] = "helloworld";
+    
+    size_t result14 = ft_strlcat(dest14, src14, sizeof(dest14));
+    success &= check_string(dest14, dest14_real, function_name, 14, "Concatenating to a buffer larger than needed with additional null characters");
+    success &= check_result(result14, strlen(dest14_real), function_name);
+
+    // Test Case 15: Concatenating large strings
+    char dest15[50] = "hello";
+    char src15[50] = "world";
+    char dest15_real[] = "helloworld";
+    
+    size_t result15 = ft_strlcat(dest15, src15, sizeof(dest15));
+    success &= check_string(dest15, dest15_real, function_name, 15, "Concatenating large strings");
+    success &= check_result(result15, strlen(dest15_real), function_name);
+
+
+	if (success) {
+        printf("SUCCESS: %s\n", function_name);
+    }
+}
+
+void ft_calloc_test()
+{
+	int success = 1;
+	const char *function_name = "ft_calloc";
+
+	int *test1 = (int *)ft_calloc(15, sizeof(int));
+	int expected1[15] = {0};
+	success &= check_int_array(test1, expected1, 15, function_name, 1);
+
+	char *test2 = (char *)ft_calloc(9, sizeof(int));
+	char expected2[9] = {0};
+	success &= check_memory(test2, 9, expected2, compare_char, function_name, 2);
+
+	int *test3 = (int *)ft_calloc(0, sizeof(int));
+	success &= check_int_array(test3, NULL, 0, function_name, 3);
+
+
+	if (success)
+	{
+		printf("Success %s\n", function_name);
+	}
+}
 
 int main(void) {
-    ft_isalpha_test();
+    /* ft_isalpha_test();
     ft_isdigit_test();
 	ft_isalnum_test();
     ft_isascii_test();
@@ -495,14 +697,16 @@ int main(void) {
 	ft_memset_test();
 	ft_bzero_test();
 	ft_memcpy_test();
-	ft_memmove_test();
-	ft_strlcpy_test();
+	ft_memmove_test(); */
 	
+	// ft_strlcpy_test();
 	// ft_strlcat_test();
 
-
+	ft_calloc_test();
+	// ft_strdup_test();
+/* 
 	ft_toupper_test();
-	ft_tolower_test();
+	ft_tolower_test(); */
 	// ft_strchr_test();
 	// ft_strrchr_test();
 	// ft_strncmp_test();
