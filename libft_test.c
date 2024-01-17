@@ -22,6 +22,15 @@ void print_memory(const void *memory, int size) {
     printf("\n");
 }
 
+void check_pointer(const void *actual, const void *expected, int expected_equal,
+                   const char *function_name, const int test_no) {
+    if ((actual == expected) != expected_equal) {
+        printf("FAIL: %s - Test %d - Pointers are%s equal\n", function_name, test_no, expected_equal ? "" : " not");
+        printf("Expected pointer: %p, Actual pointer: %p\n", expected, actual);
+    }
+}
+
+
 int check_int_array(const int *actual, const int *expected, int size, const char *function_name, const int test_no) {
     int success = 1;
 
@@ -673,13 +682,46 @@ void ft_calloc_test()
 	int expected1[15] = {0};
 	success &= check_int_array(test1, expected1, 15, function_name, 1);
 
-	char *test2 = (char *)ft_calloc(9, sizeof(int));
+	char *test2 = (char *)ft_calloc(9, sizeof(char));
 	char expected2[9] = {0};
 	success &= check_memory(test2, 9, expected2, compare_char, function_name, 2);
 
 	int *test3 = (int *)ft_calloc(0, sizeof(int));
 	success &= check_int_array(test3, NULL, 0, function_name, 3);
 
+
+	if (success)
+	{
+		printf("Success %s\n", function_name);
+	}
+}
+
+void ft_strdup_test()
+{
+	int success = 1;
+	const char *function_name = "ft_strdup";
+
+	char string[] = "Hello";
+	char *clone = ft_strdup(string);
+	success &= check_string(clone, string, function_name, 1, "checking string");
+
+	char string2[] = "";
+	char *clone2 = ft_strdup(string2);
+	success &= check_string(clone2, string2, function_name, 2, "empty string");
+	
+	char string3[] = "Hello";
+    char *clone3 = ft_strdup(string3);
+    check_pointer(clone3, string3, 0, function_name, 3); 
+
+    success &= check_string(clone3, string3, function_name, 4, "Comparing strings");
+
+	char large_string[10000];
+	char *clone5 = ft_strdup(large_string);
+	success &= check_string(clone5, large_string, function_name, 5, "Comparing large strings");
+
+	char string6[] = "Hello";
+	char *clone6 = ft_strdup(string6);
+	success &= check_string(clone6, string6, function_name, 6, "Comparing strings with null-termination");
 
 	if (success)
 	{
@@ -697,16 +739,17 @@ int main(void) {
 	ft_memset_test();
 	ft_bzero_test();
 	ft_memcpy_test();
-	ft_memmove_test(); */
+
+	ft_memmove_test();// make sure to remake this without malloc */
 	
 	// ft_strlcpy_test();
 	// ft_strlcat_test();
-
-	ft_calloc_test();
+	// ft_calloc_test();
 	// ft_strdup_test();
 /* 
 	ft_toupper_test();
 	ft_tolower_test(); */
+	
 	// ft_strchr_test();
 	// ft_strrchr_test();
 	// ft_strncmp_test();
