@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dwoidt <dwoidt@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/07 21:20:36 by dwoidt            #+#    #+#             */
-/*   Updated: 2024/01/07 21:20:36 by dwoidt           ###   ########.fr       */
+/*   Created: 2024/02/01 19:45:57 by dwoidt            #+#    #+#             */
+/*   Updated: 2024/02/01 19:45:57 by dwoidt           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 #include <stdio.h>
 #include <string.h>
-
 
 void print_memory(const void *memory, int size) {
     printf("Memory Content: ");
@@ -750,7 +750,7 @@ void ft_strchr_test()
 {
 	int success = 1;
 	const char *function_name = "ft_strchr";
-	char *string = "String";
+	char *string = "Stringr rdddd";
 	char *c = "r";
 	success &= check_char(ft_strchr(string, *c), c, function_name, 1, "Checking if letter is found in string");
 	char *string2 = "Test";
@@ -762,13 +762,24 @@ void ft_strchr_test()
 	else
 	{
 		printf("%s - Failed NULL check in Test 2\n", function_name);
+		success = 0;
 	}
 
-	char *string3 = "rest";
-	char *string4 = "Tesr";
+	char *string3 = "restrdsfds";
+	char *string4 = "Trersr";
 
 	success &= check_char(ft_strchr(string3, *c), c, function_name, 3, "Checking if letter is found in string");
 	success &= check_char(ft_strchr(string4, *c), c, function_name, 4, "Checking if letter is found in string");
+
+	if (ft_strchr(string, *c) == strchr(string, *c))
+	{
+		success &= 1;
+	}
+	else
+	{
+		printf("%s - Failed memory address check in Test 5\n", function_name);
+		success &= 0;
+	}
 
 	if (success)
 	{
@@ -780,8 +791,36 @@ void ft_strrchr_test()
 {
 	int success = 1;
 	const char *function_name = "ft_strrchr";
+	char *string = "Stringr rdddd";
+	char *c = "r";
+	success &= check_char(ft_strrchr(string, *c), c, function_name, 1, "Checking if letter is found in string");
+	char *string2 = "Test";
 
-	success &= 1;
+	if (ft_strrchr(string2, *c) == NULL)
+	{
+		success &= 1;
+	}
+	else
+	{
+		printf("%s - Failed NULL check in Test 2\n", function_name);
+		success = 0;
+	}
+
+	char *string3 = "restrdsfds";
+	char *string4 = "Trersr";
+
+	success &= check_char(ft_strrchr(string3, *c), c, function_name, 3, "Checking if letter is found in string");
+	success &= check_char(ft_strrchr(string4, *c), c, function_name, 4, "Checking if letter is found in string");
+
+	if (ft_strrchr(string, *c) == strrchr(string, *c))
+	{
+		success &= 1;
+	}
+	else
+	{
+		printf("%s - Failed memory address check in Test 5\n", function_name);
+		success &= 0;
+	}
 
 	if (success)
 	{
@@ -805,11 +844,11 @@ int main(void) {
 	// ft_calloc_test();
 	ft_strdup_test(); */
 	
-/* 
-	ft_toupper_test();
+
+	/* ft_toupper_test();
 	ft_tolower_test();
 	ft_strchr_test(); */
-	//ft_strrchr_test();
+	ft_strrchr_test();
 	// ft_strncmp_test();
 	// ft_memchr_test();
 	// ft_memcmp_test();
