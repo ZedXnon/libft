@@ -68,6 +68,23 @@ int check_string(const char *actual, const char *expected, const char *function_
     }
 }
 
+int check_char(const char *actual, const char *expected, const char *function_name, const int test_no, const char *info) {
+	int success = 1;
+	if ((expected == NULL && actual != NULL) || (actual == NULL && expected != NULL))
+	{
+		success = 0;
+	}
+	if (((actual == NULL || expected == NULL) && actual != expected) || actual[0] != *expected)
+	{
+		success = 0;
+	}
+	if (!success)
+	{
+		printf("FAIL: %s - Test %d - %s\n", function_name, test_no, info);
+    	printf("Expected: \"%s\", Actual: \"%s\"\n", expected, actual);
+	}
+	return (success);
+}
 
 int check_memory(const void *memory, int size, const void *expected_memory,
                  int (*compare)(const void *, const void *), const char *function_name, const int test_no) {
@@ -733,8 +750,38 @@ void ft_strchr_test()
 {
 	int success = 1;
 	const char *function_name = "ft_strchr";
+	char *string = "String";
+	char *c = "r";
+	success &= check_char(ft_strchr(string, *c), c, function_name, 1, "Checking if letter is found in string");
+	char *string2 = "Test";
 
-	
+	if (ft_strchr(string2, *c) == NULL)
+	{
+		success &= 1;
+	}
+	else
+	{
+		printf("%s - Failed NULL check in Test 2\n", function_name);
+	}
+
+	char *string3 = "rest";
+	char *string4 = "Tesr";
+
+	success &= check_char(ft_strchr(string3, *c), c, function_name, 3, "Checking if letter is found in string");
+	success &= check_char(ft_strchr(string4, *c), c, function_name, 4, "Checking if letter is found in string");
+
+	if (success)
+	{
+		printf("Success %s\n", function_name);
+	}
+}
+
+void ft_strrchr_test()
+{
+	int success = 1;
+	const char *function_name = "ft_strrchr";
+
+	success &= 1;
 
 	if (success)
 	{
@@ -743,7 +790,7 @@ void ft_strchr_test()
 }
 
 int main(void) {
-    ft_isalpha_test();
+   /*  ft_isalpha_test();
     ft_isdigit_test();
 	ft_isalnum_test();
     ft_isascii_test();
@@ -756,20 +803,19 @@ int main(void) {
 	// ft_strlcpy_test();
 	// ft_strlcat_test();
 	// ft_calloc_test();
-	ft_strdup_test();
+	ft_strdup_test(); */
 	
 /* 
 	ft_toupper_test();
-	ft_tolower_test(); */
-	
-	// ft_strchr_test();
-	// ft_strrchr_test();
+	ft_tolower_test();
+	ft_strchr_test(); */
+	//ft_strrchr_test();
 	// ft_strncmp_test();
 	// ft_memchr_test();
 	// ft_memcmp_test();
 	// ft_strnstr_test();
 	// ft_atoi_test();
-
+	
 	// ft_substr_test();
 	// ft_strjoin_test();
 	// ft_strtrim_test();
