@@ -827,6 +827,22 @@ void ft_strrchr_test()
 		printf("Success %s\n", function_name);
 	}
 }
+void ft_strncmp_test()
+{
+	int success = 1;
+	const char *function_name = "ft_strncmp";
+	char *string1 = "Test1";
+	char *string2 = "Test2";
+	char *string3 = "Tet2";
+
+	success &= (ft_strncmp(string1, string2, 200) == strncmp(string1, string2, 200));
+	success &= (ft_strncmp(string3, string2, 2) == strncmp(string3, string2, 2));
+	success &= (ft_strncmp(string2, string2, 3) == strncmp(string2, string2, 3));
+	if (success)
+	{
+		printf("Success %s\n", function_name);
+	}
+}
 
 int main(void) {
    /*  ft_isalpha_test();
@@ -847,9 +863,9 @@ int main(void) {
 
 	/* ft_toupper_test();
 	ft_tolower_test();
-	ft_strchr_test(); */
-	ft_strrchr_test();
-	// ft_strncmp_test();
+	ft_strchr_test();
+	ft_strrchr_test(); */
+	ft_strncmp_test();
 	// ft_memchr_test();
 	// ft_memcmp_test();
 	// ft_strnstr_test();
