@@ -102,11 +102,11 @@ int check_memory(const void *memory, int size, const void *expected_memory,
     return success;
 }
 
-int check_result(int actual, int expected, const char *function_name) {
+int check_result(int actual, int expected, const char *function_name, int test_no) {
     if (actual == expected) {
         return 1;
     } else {
-        printf("FAIL: %s - (Expected: %d, Actual: %d)\n", function_name, expected, actual);
+        printf("FAIL: %s - (Expected: %d, Actual: %d) - Test %d\n", function_name, expected, actual, test_no);
         return 0;
     }
 }
@@ -132,13 +132,13 @@ void ft_isalpha_test() {
     const char *function_name = "ft_isalpha";
     int success = 1;
 
-    success &= check_result(ft_isalpha('a'), 1, function_name);
-    success &= check_result(ft_isalpha('A'), 1, function_name);
-    success &= check_result(ft_isalpha('z'), 1, function_name);
-    success &= check_result(ft_isalpha('Z'), 1, function_name);
-    success &= check_result(ft_isalpha('1'), 0, function_name);
-    success &= check_result(ft_isalpha('\t'), 0, function_name);
-    success &= check_result(ft_isalpha('\n'), 0, function_name);
+    success &= check_result(ft_isalpha('a'), 1, function_name, 1);
+    success &= check_result(ft_isalpha('A'), 1, function_name, 2);
+    success &= check_result(ft_isalpha('z'), 1, function_name, 3);
+    success &= check_result(ft_isalpha('Z'), 1, function_name, 4);
+    success &= check_result(ft_isalpha('1'), 0, function_name, 5);
+    success &= check_result(ft_isalpha('\t'), 0, function_name, 6);
+    success &= check_result(ft_isalpha('\n'), 0, function_name, 7);
 
     if (success) {
         printf("SUCCESS: %s\n", function_name);
@@ -149,13 +149,13 @@ void ft_toupper_test() {
     const char *function_name = "ft_toupper";
     int success = 1;
 
-    success &= check_result(ft_toupper('a'), 'A', function_name);
-    success &= check_result(ft_toupper('A'), 'A', function_name);
-    success &= check_result(ft_toupper('z'), 'Z', function_name);
-    success &= check_result(ft_toupper('Z'), 'Z', function_name);
-    success &= check_result(ft_toupper('1'), '1', function_name);
-    success &= check_result(ft_toupper('\t'), '\t', function_name);
-    success &= check_result(ft_toupper('\n'), '\n', function_name);
+    success &= check_result(ft_toupper('a'), 'A', function_name, 1);
+    success &= check_result(ft_toupper('A'), 'A', function_name, 2);
+    success &= check_result(ft_toupper('z'), 'Z', function_name, 3);
+    success &= check_result(ft_toupper('Z'), 'Z', function_name, 4);
+    success &= check_result(ft_toupper('1'), '1', function_name, 5);
+    success &= check_result(ft_toupper('\t'), '\t', function_name, 6);
+    success &= check_result(ft_toupper('\n'), '\n', function_name, 7);
 
     if (success) {
         printf("SUCCESS: %s\n", function_name);
@@ -166,14 +166,14 @@ void ft_isdigit_test() {
     const char *function_name = "ft_isdigit";
     int success = 1;
 
-    success &= check_result(ft_isdigit('0'), 1, function_name);
-    success &= check_result(ft_isdigit('5'), 1, function_name);
-    success &= check_result(ft_isdigit('9'), 1, function_name);
-    success &= check_result(ft_isdigit('a'), 0, function_name);
-    success &= check_result(ft_isdigit('A'), 0, function_name);
-    success &= check_result(ft_isdigit('@'), 0, function_name);
-    success &= check_result(ft_isdigit('\t'), 0, function_name);
-    success &= check_result(ft_isdigit('\n'), 0, function_name);
+    success &= check_result(ft_isdigit('0'), 1, function_name, 1);
+    success &= check_result(ft_isdigit('5'), 1, function_name, 2);
+    success &= check_result(ft_isdigit('9'), 1, function_name, 3);
+    success &= check_result(ft_isdigit('a'), 0, function_name, 4);
+    success &= check_result(ft_isdigit('A'), 0, function_name, 5);
+    success &= check_result(ft_isdigit('@'), 0, function_name, 6);
+    success &= check_result(ft_isdigit('\t'), 0, function_name, 7);
+    success &= check_result(ft_isdigit('\n'), 0, function_name, 8);
 
     if (success) {
         printf("SUCCESS: %s\n", function_name);
@@ -184,13 +184,13 @@ void ft_tolower_test() {
     const char *function_name = "ft_tolower";
     int success = 1;
 
-    success &= check_result(ft_tolower('a'), 'a', function_name);
-    success &= check_result(ft_tolower('A'), 'a', function_name);
-    success &= check_result(ft_tolower('z'), 'z', function_name);
-    success &= check_result(ft_tolower('Z'), 'z', function_name);
-    success &= check_result(ft_tolower('1'), '1', function_name);
-    success &= check_result(ft_tolower('\t'), '\t', function_name);
-    success &= check_result(ft_tolower('\n'), '\n', function_name);
+    success &= check_result(ft_tolower('a'), 'a', function_name, 1);
+    success &= check_result(ft_tolower('A'), 'a', function_name, 2);
+    success &= check_result(ft_tolower('z'), 'z', function_name, 3);
+    success &= check_result(ft_tolower('Z'), 'z', function_name, 4);
+    success &= check_result(ft_tolower('1'), '1', function_name, 5);
+    success &= check_result(ft_tolower('\t'), '\t', function_name, 6);
+    success &= check_result(ft_tolower('\n'), '\n', function_name, 7);
 
     if (success) {
         printf("SUCCESS: %s\n", function_name);
@@ -201,11 +201,11 @@ void ft_isalnum_test() {
     const char *function_name = "ft_isalnum";
     int success = 1;
 
-    success &= check_result(ft_isalnum('a'), 1, function_name);
-    success &= check_result(ft_isalnum('5'), 1, function_name);
-    success &= check_result(ft_isalnum('@'), 0, function_name);
-    success &= check_result(ft_isalnum('\t'), 0, function_name);
-    success &= check_result(ft_isalnum('\n'), 0, function_name);
+    success &= check_result(ft_isalnum('a'), 1, function_name, 1);
+    success &= check_result(ft_isalnum('5'), 1, function_name, 2);
+    success &= check_result(ft_isalnum('@'), 0, function_name, 3);
+    success &= check_result(ft_isalnum('\t'), 0, function_name, 4);
+    success &= check_result(ft_isalnum('\n'), 0, function_name, 5);
 
     if (success) {
         printf("SUCCESS: %s\n", function_name);
@@ -217,12 +217,12 @@ void ft_isascii_test() {
     const char *function_name = "ft_isascii";
     int success = 1;
 
-    success &= check_result(ft_isascii('a'), 1, function_name);
-    success &= check_result(ft_isascii(127), 1, function_name);
-    success &= check_result(ft_isascii(128), 0, function_name);
-    success &= check_result(ft_isascii('\t'), 1, function_name);
-    success &= check_result(ft_isascii('\n'), 1, function_name);
-	success &= check_result(ft_isascii(0), 1, function_name);
+    success &= check_result(ft_isascii('a'), 1, function_name, 1);
+    success &= check_result(ft_isascii(127), 1, function_name, 2);
+    success &= check_result(ft_isascii(128), 0, function_name, 3);
+    success &= check_result(ft_isascii('\t'), 1, function_name, 4);
+    success &= check_result(ft_isascii('\n'), 1, function_name, 5);
+	success &= check_result(ft_isascii(0), 1, function_name, 6);
 
     if (success) {
         printf("SUCCESS: %s\n", function_name);
@@ -234,13 +234,13 @@ void ft_isprint_test() {
     const char *function_name = "ft_isprint";
     int success = 1;
 
-    success &= check_result(ft_isprint('a'), 1, function_name);
-    success &= check_result(ft_isprint(32), 1, function_name);
-    success &= check_result(ft_isprint(31), 0, function_name);
-    success &= check_result(ft_isprint(127), 0, function_name);
-	success &= check_result(ft_isprint(126), 1, function_name);
-    success &= check_result(ft_isprint('\t'), 0, function_name);
-    success &= check_result(ft_isprint('\n'), 0, function_name);
+    success &= check_result(ft_isprint('a'), 1, function_name, 1);
+    success &= check_result(ft_isprint(32), 1, function_name, 2);
+    success &= check_result(ft_isprint(31), 0, function_name, 3);
+    success &= check_result(ft_isprint(127), 0, function_name, 4);
+	success &= check_result(ft_isprint(126), 1, function_name, 5);
+    success &= check_result(ft_isprint('\t'), 0, function_name, 6);
+    success &= check_result(ft_isprint('\n'), 0, function_name, 7);
 
     if (success) {
         printf("SUCCESS: %s\n", function_name);
@@ -252,9 +252,9 @@ void ft_strlen_test() {
     const char *function_name = "ft_strlen";
     int success = 1;
 
-    success &= check_result(ft_strlen(""), 0, function_name);
-    success &= check_result(ft_strlen("Hello"), 5, function_name);
-    success &= check_result(ft_strlen("1234567890"), 10, function_name);
+    success &= check_result(ft_strlen(""), 0, function_name, 1);
+    success &= check_result(ft_strlen("Hello"), 5, function_name, 2);
+    success &= check_result(ft_strlen("1234567890"), 10, function_name, 3);
 
     if (success) {
         printf("SUCCESS: %s\n", function_name);
@@ -336,40 +336,40 @@ void ft_atoi_test() {
     int success = 1;
 
     // Test case 1: Basic positive integer
-    success &= check_result(ft_atoi("123"), 123, function_name);
+    success &= check_result(ft_atoi("123"), 123, function_name, 1);
 
     // Test case 2: Basic negative integer
-    success &= check_result(ft_atoi("-456"), -456, function_name);
+    success &= check_result(ft_atoi("-456"), -456, function_name, 2);
 
     // Test case 3: String with leading spaces
-    success &= check_result(ft_atoi("   789"), 789, function_name);
+    success &= check_result(ft_atoi("   789"), 789, function_name, 3);
 
     // Test case 4: String with trailing spaces
-    success &= check_result(ft_atoi("456   "), 456, function_name);
+    success &= check_result(ft_atoi("456   "), 456, function_name, 4);
 
     // Test case 5: String with both leading and trailing spaces
-    success &= check_result(ft_atoi("  -123  "), -123, function_name);
+    success &= check_result(ft_atoi("  -123  "), -123, function_name, 5);
 
     // Test case 6: Integer with positive sign
-    success &= check_result(ft_atoi("+789"), 789, function_name);
+    success &= check_result(ft_atoi("+789"), 789, function_name, 6);
 
     // Test case 7: Integer with multiple signs
-    success &= check_result(ft_atoi("--456"), 456, function_name);
+    success &= check_result(ft_atoi("--456"), 456, function_name, 7);
 
     // Test case 8: Integer with overflow
-    success &= check_result(ft_atoi("2147483648"), 2147483647, function_name);  // Overflow should return INT_MAX
+    success &= check_result(ft_atoi("2147483648"), 2147483647, function_name, 8);  // Overflow should return INT_MAX
 
     // Test case 9: Integer with underflow
-    success &= check_result(ft_atoi("-2147483649"), -2147483648, function_name);  // Underflow should return INT_MIN
+    success &= check_result(ft_atoi("-2147483649"), -2147483648, function_name, 9);  // Underflow should return INT_MIN
 
     // Test case 10: Empty string
-    success &= check_result(ft_atoi(""), 0, function_name);
+    success &= check_result(ft_atoi(""), 0, function_name, 10);
 
     // Test case 11: String with non-numeric characters
-    success &= check_result(ft_atoi("abc"), 0, function_name);
+    success &= check_result(ft_atoi("abc"), 0, function_name, 11);
 
     // Test case 12: String with non-numeric characters and then a valid number
-    success &= check_result(ft_atoi("xyz123"), 0, function_name);
+    success &= check_result(ft_atoi("xyz123"), 0, function_name, 12);
 
     if (success) {
         printf("SUCCESS: %s\n", function_name);
@@ -554,7 +554,7 @@ void ft_strlcat_test()
     
     size_t result1 = ft_strlcat(dest1, src1, sizeof(dest1));
     success &= check_string(dest1, dest1_real, function_name, 1, "Concatenating within buffer size");
-    success &= check_result(result1, strlen(dest1_real), function_name);
+    success &= check_result(result1, strlen(dest1_real), function_name, 1);
 
     // Test Case 2: Concatenating to a smaller buffer
     char dest2[7] = "hello";
@@ -563,7 +563,7 @@ void ft_strlcat_test()
     
     size_t result2 = ft_strlcat(dest2, src2, sizeof(dest2));
     success &= check_string(dest2, dest2_real, function_name, 2, "Concatenating to a smaller buffer");
-    success &= check_result(result2, strlen(dest2_real), function_name);
+    success &= check_result(result2, strlen(dest2_real), function_name, 2);
 
     // Test Case 3: Concatenating an empty source string
     char dest3[10] = "hello";
@@ -572,7 +572,7 @@ void ft_strlcat_test()
     
     size_t result3 = ft_strlcat(dest3, src3, sizeof(dest3));
     success &= check_string(dest3, dest3_real, function_name, 3, "Concatenating an empty source string");
-    success &= check_result(result3, strlen(dest3_real), function_name);
+    success &= check_result(result3, strlen(dest3_real), function_name, 3);
 
     // Test Case 4: Concatenating to an empty destination string
     char dest4[1] = "";
@@ -581,7 +581,7 @@ void ft_strlcat_test()
     
     size_t result4 = ft_strlcat(dest4, src4, sizeof(dest4));
     success &= check_string(dest4, dest4_real, function_name, 4, "Concatenating to an empty destination string");
-    success &= check_result(result4, strlen(dest4_real), function_name);
+    success &= check_result(result4, strlen(dest4_real), function_name, 4);
 
     // Test Case 5: Concatenating an empty source string to a larger buffer
     char dest5[10] = "hello";
@@ -590,7 +590,7 @@ void ft_strlcat_test()
     
     size_t result5 = ft_strlcat(dest5, src5, sizeof(dest5));
     success &= check_string(dest5, dest5_real, function_name, 5, "Concatenating an empty source string to a larger buffer");
-    success &= check_result(result5, strlen(dest5_real), function_name);
+    success &= check_result(result5, strlen(dest5_real), function_name, 5);
 
     // Test Case 6: Concatenating a non-empty source string to a buffer with size 0
     char dest6[1] = "";
@@ -599,7 +599,7 @@ void ft_strlcat_test()
     
     size_t result6 = ft_strlcat(dest6, src6, 0);
     success &= check_string(dest6, dest6_real, function_name, 6, "Concatenating to a buffer with size 0");
-    success &= check_result(result6, strlen(dest6_real), function_name);
+    success &= check_result(result6, strlen(dest6_real), function_name, 6);
 
     // Test Case 7: Concatenating a source string that is exactly the size of the destination buffer
     char dest7[10] = "hello";
@@ -608,7 +608,7 @@ void ft_strlcat_test()
     
     size_t result7 = ft_strlcat(dest7, src7, sizeof(dest7));
     success &= check_string(dest7, dest7_real, function_name, 7, "Concatenating a string with the size of the destination buffer");
-    success &= check_result(result7, strlen(dest7_real), function_name);
+    success &= check_result(result7, strlen(dest7_real), function_name, 7);
 
     // Additional Edge Cases:
 
@@ -619,7 +619,7 @@ void ft_strlcat_test()
     
     size_t result8 = ft_strlcat(dest8, src8, sizeof(dest8));
     success &= check_string(dest8, dest8_real, function_name, 8, "Concatenating to an empty destination string with larger buffer size");
-    success &= check_result(result8, strlen(dest8_real), function_name);
+    success &= check_result(result8, strlen(dest8_real), function_name, 8);
 
     // Test Case 9: Concatenating an empty source string to a larger buffer with larger buffer size
     char dest9[15] = "hello";
@@ -628,7 +628,7 @@ void ft_strlcat_test()
     
     size_t result9 = ft_strlcat(dest9, src9, sizeof(dest9));
     success &= check_string(dest9, dest9_real, function_name, 9, "Concatenating an empty source string to a larger buffer with larger buffer size");
-    success &= check_result(result9, strlen(dest9_real), function_name);
+    success &= check_result(result9, strlen(dest9_real), function_name, 9);
 
     // Test Case 10: Concatenating to a buffer with size 0
     char dest10[10] = "hello";
@@ -637,7 +637,7 @@ void ft_strlcat_test()
     
     size_t result10 = ft_strlcat(dest10, src10, 0);
     success &= check_string(dest10, dest10_real, function_name, 10, "Concatenating to a buffer with size 0");
-    success &= check_result(result10, strlen(dest10_real), function_name);
+    success &= check_result(result10, strlen(dest10_real), function_name, 10);
 
     // Test Case 11: Concatenating a source string that is exactly one less than needed for the destination buffer
     char dest11[10] = "hello";
@@ -646,7 +646,7 @@ void ft_strlcat_test()
     
     size_t result11 = ft_strlcat(dest11, src11, sizeof(dest11) - 1);
     success &= check_string(dest11, dest11_real, function_name, 11, "Concatenating a source string that is exactly one less than needed for the destination buffer");
-    success &= check_result(result11, strlen(dest11_real), function_name);
+    success &= check_result(result11, strlen(dest11_real), function_name, 11);
 
     // Test Case 12: Concatenating a source string that is exactly one more than needed for the destination buffer
     char dest12[10] = "hello";
@@ -655,7 +655,7 @@ void ft_strlcat_test()
     
     size_t result12 = ft_strlcat(dest12, src12, sizeof(dest12) - 1);
     success &= check_string(dest12, dest12_real, function_name, 12, "Concatenating a source string that is exactly one more than needed for the destination buffer");
-    success &= check_result(result12, strlen(dest12_real), function_name);
+    success &= check_result(result12, strlen(dest12_real), function_name, 12);
 
     // Test Case 13: Concatenating to a buffer larger than needed
     char dest13[20] = "hello";
@@ -664,7 +664,7 @@ void ft_strlcat_test()
     
     size_t result13 = ft_strlcat(dest13, src13, sizeof(dest13));
     success &= check_string(dest13, dest13_real, function_name, 13, "Concatenating to a buffer larger than needed");
-    success &= check_result(result13, strlen(dest13_real), function_name);
+    success &= check_result(result13, strlen(dest13_real), function_name, 13);
 
     // Test Case 14: Concatenating to a buffer larger than needed with additional null characters
     char dest14[20] = "hello";
@@ -673,7 +673,7 @@ void ft_strlcat_test()
     
     size_t result14 = ft_strlcat(dest14, src14, sizeof(dest14));
     success &= check_string(dest14, dest14_real, function_name, 14, "Concatenating to a buffer larger than needed with additional null characters");
-    success &= check_result(result14, strlen(dest14_real), function_name);
+    success &= check_result(result14, strlen(dest14_real), function_name, 14);
 
     // Test Case 15: Concatenating large strings
     char dest15[50] = "hello";
@@ -682,7 +682,7 @@ void ft_strlcat_test()
     
     size_t result15 = ft_strlcat(dest15, src15, sizeof(dest15));
     success &= check_string(dest15, dest15_real, function_name, 15, "Concatenating large strings");
-    success &= check_result(result15, strlen(dest15_real), function_name);
+    success &= check_result(result15, strlen(dest15_real), function_name, 15);
 
 
 	if (success) {
@@ -827,6 +827,7 @@ void ft_strrchr_test()
 		printf("Success %s\n", function_name);
 	}
 }
+
 void ft_strncmp_test()
 {
 	int success = 1;
@@ -835,9 +836,10 @@ void ft_strncmp_test()
 	char *string2 = "Test2";
 	char *string3 = "Tet2";
 
-	success &= (ft_strncmp(string1, string2, 200) == strncmp(string1, string2, 200));
-	success &= (ft_strncmp(string3, string2, 2) == strncmp(string3, string2, 2));
-	success &= (ft_strncmp(string2, string2, 3) == strncmp(string2, string2, 3));
+	success &= check_result(ft_strncmp(string1, string2, 200) == strncmp(string1, string2, 200), 1, function_name, 1);
+	success &= check_result(ft_strncmp(string3, string2, 2) == strncmp(string3, string2, 2), 1, function_name, 2);
+	success &= check_result(ft_strncmp(string2, string2, 3) == strncmp(string2, string2, 3), 1, function_name, 3);
+	success &= check_result(ft_strncmp(string2, string2, 0) == strncmp(string2, string2, 0), 1, function_name, 4);
 	if (success)
 	{
 		printf("Success %s\n", function_name);
