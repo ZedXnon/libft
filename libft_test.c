@@ -22,12 +22,17 @@ void print_memory(const void *memory, int size) {
     printf("\n");
 }
 
-void check_pointer(const void *actual, const void *expected, int expected_equal,
+int check_pointer(const void *actual, const void *expected, int expected_equal,
                    const char *function_name, const int test_no) {
     if ((actual == expected) != expected_equal) {
         printf("FAIL: %s - Test %d - Pointers are%s equal\n", function_name, test_no, expected_equal ? "" : " not");
         printf("Expected pointer: %p, Actual pointer: %p\n", expected, actual);
+		return (0);
     }
+	else
+	{
+		return (1);
+	}
 }
 
 
@@ -840,6 +845,34 @@ void ft_strncmp_test()
 	success &= check_result(ft_strncmp(string3, string2, 2) == strncmp(string3, string2, 2), 1, function_name, 2);
 	success &= check_result(ft_strncmp(string2, string2, 3) == strncmp(string2, string2, 3), 1, function_name, 3);
 	success &= check_result(ft_strncmp(string2, string2, 0) == strncmp(string2, string2, 0), 1, function_name, 4);
+	success &= check_result(ft_strncmp("", "", 0) == strncmp("", "", 0), 1, function_name, 5);
+	success &= check_result(ft_strncmp(string1, string2, -1) == strncmp(string1, string2, -1), 1, function_name, 6);
+	success &= check_result(ft_strncmp("abc", "ABC", 3) == strncmp("abc", "ABC", 3), 1, function_name, 7);
+	success &= check_result(ft_strncmp("abc\0def", "abc\0ghi", 7) == strncmp("abc\0def", "abc\0ghi", 7), 1, function_name, 8);
+	success &= check_result(ft_strncmp("short", "longer", 5) == strncmp("short", "longer", 5), 1, function_name, 9);
+	success &= check_result(ft_strncmp(string1, string2, 1000) == strncmp(string1, string2, 1000), 1, function_name, 10);
+
+	if (success)
+	{
+		printf("Success %s\n", function_name);
+	}
+}
+
+void ft_memchr_test()
+{
+	int success = 1;
+	const char *function_name = "ft_memchr";
+	char *string = "This is a test.";
+	char *expected = "a test.";
+	char *result = ft_memchr(string, 'a', 15);
+	
+	success &= check_memory(result, sizeof(result), expected, compare_char, function_name, 1);
+	success &= check_pointer(ft_memchr(string, ' ', 10), memchr(string, ' ', 10), 1, function_name, 2);
+	success &= check_pointer(ft_memchr(string, ' ', 0), memchr(string, ' ', 0), 1, function_name, 3);
+	success &= check_pointer(ft_memchr(string, *"", 200), memchr(string, *"", 200), 1, function_name, 4);
+	success &= check_pointer(ft_memchr(string, 't', 1000), memchr(string, 't', 1000), 1, function_name, 5);
+	success &= check_pointer(ft_memchr(string, *"test", 1000), memchr(string, *"test", 1000), 1, function_name, 6);
+	
 	if (success)
 	{
 		printf("Success %s\n", function_name);
@@ -862,13 +895,13 @@ int main(void) {
 	// ft_calloc_test();
 	ft_strdup_test(); */
 	
-
-	/* ft_toupper_test();
+/* 
+	ft_toupper_test();
 	ft_tolower_test();
 	ft_strchr_test();
-	ft_strrchr_test(); */
-	ft_strncmp_test();
-	// ft_memchr_test();
+	ft_strrchr_test();
+	ft_strncmp_test(); */
+	ft_memchr_test();
 	// ft_memcmp_test();
 	// ft_strnstr_test();
 	// ft_atoi_test();
