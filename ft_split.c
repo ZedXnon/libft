@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 
 static int	count_substrings(const char *s, char c)
@@ -29,7 +28,7 @@ static int	count_substrings(const char *s, char c)
 	return (count);
 }
 
-int	check_array(char **array, int j)
+static int	check_array(char **array, int j)
 {
 	if (array[j] == NULL)
 	{
