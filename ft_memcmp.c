@@ -30,8 +30,10 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 		i++;
 	}
 	if (i == n)
-	{
 		return (0);
-	}
-	return (uc_s1[i] - uc_s2[i]);
+	if (uc_s1[i] < uc_s2[i])
+		return (-1);
+	else if (uc_s1[i] > uc_s2[i])
+		return (1);
+	return (0);
 }

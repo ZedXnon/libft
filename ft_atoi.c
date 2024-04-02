@@ -19,7 +19,7 @@ static int	parse_sign(const char *str, size_t *i, int *is_negative)
 	has_sign = 0;
 	while (str[*i])
 	{
-		if (str[*i] == ' ' || (str[*i] >= 9 && str[*i] <= 13))
+		if ((str[*i] >= 9 && str[*i] <= 13) || str[*i] == ' ')
 		{
 			if (has_sign)
 				break ;
@@ -60,7 +60,8 @@ int	ft_atoi(const char *str)
 
 	i = 0;
 	is_negative = 0;
-	if (!parse_sign(str, &i, &is_negative) || !ft_isdigit(str[i]))
+	parse_sign(str, &i, &is_negative);
+	if (!ft_isdigit(str[i]))
 		return (0);
 	return (get_num(str + i, is_negative));
 }

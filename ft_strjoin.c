@@ -37,4 +37,3 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	string[length] = '\0';
 	return (string);
 }
-

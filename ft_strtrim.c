@@ -44,6 +44,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int	start;
 	int	end;
 
+	if (s1 == NULL || set == NULL)
+		return (NULL);
 	start = get_chars(1, s1, set, 0);
 	end = get_chars(-1, s1, set, ft_strlen(s1) - 1);
 	return (ft_substr(s1, start, ft_strlen(s1) - (start + end)));
